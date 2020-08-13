@@ -49,7 +49,7 @@ export class AuthService {
     setUser(usuario:UsuarioInterface):void {
         let usuario_string = JSON.stringify(usuario);
         localStorage.setItem("usuarioActual",usuario_string);
-    }
+    } 
 
     setToken(token):void{
         localStorage.setItem("tokenAcceso",token);

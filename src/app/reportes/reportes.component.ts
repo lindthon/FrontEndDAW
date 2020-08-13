@@ -21,7 +21,7 @@ export class ReportesComponent implements OnInit {
   onSubmit(queryForm:NgForm):void{
     var user = queryForm.value;
     
-    this.httpClient.post(`http://192.168.0.24:3000/api/objetosFecha`,{
+    this.httpClient.post(`http://localhost:3000/api/objetosFecha`,{
       fecha:"2019-08-16"
     
   })

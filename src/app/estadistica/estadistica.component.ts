@@ -18,7 +18,7 @@ export class EstadisticaComponent implements OnInit{
   onSubmit(queryForm:NgForm):void{
     var user = queryForm.value;
     
-    this.httpClient.post(`http://192.168.0.24:3000/api/objetosFecha`,{
+    this.httpClient.post(`http://localhost:3000/api/objetosFecha`,{
       fecha:"2019-08-16"
     
   })
@@ -56,7 +56,7 @@ export class EstadisticaComponent implements OnInit{
     
     for(let i=1;i<10;i++){
       
-      this.httpClient.post(`http://192.168.0.24:3000/api/objetosMes`,{
+      this.httpClient.post(`http://localhost:3000/api/objetosMes`,{
         mes:"0"+i
       })
       .subscribe(
@@ -69,7 +69,7 @@ export class EstadisticaComponent implements OnInit{
     }
     for(let i=9;i<12;i++){
       
-      this.httpClient.post(`http://192.168.0.24:3000/api/objetosMes`,{
+      this.httpClient.post(`http://localhost:3000/api/objetosMes`,{
         mes:i+""
       })
       .subscribe(
@@ -91,7 +91,7 @@ export class EstadisticaComponent implements OnInit{
     var categorias=[]
     var cantidadCategorias=[]
     console.log("About to exe loadData2")
-    this.httpClient.get(`http://192.168.0.24:3000/api/subcategorias`)
+    this.httpClient.get(`http://localhost:3000/api/subcategorias`)
     .subscribe(
       (data:any[]) => {
         data.forEach(element => {
@@ -109,7 +109,7 @@ export class EstadisticaComponent implements OnInit{
         
       });
     });
-    this.httpClient.get(`http://192.168.0.24:3000/api/categorias`)
+    this.httpClient.get(`http://localhost:3000/api/categorias`)
     .subscribe(
       (data:any[]) => {
         data.forEach(element => {
@@ -146,7 +146,7 @@ export class EstadisticaComponent implements OnInit{
   loadData3(){
     var calificaciones=[]
     var cantidadCalificaciones=[]
-    this.httpClient.get(`http://192.168.0.24:3000/api/calificaciones`)
+    this.httpClient.get(`http://localhost:3000/api/calificaciones`)
     .subscribe(
       (data:any[]) => {
         console.log(data);

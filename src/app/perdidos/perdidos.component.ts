@@ -9,21 +9,31 @@ import { ObjetoInterface } from './../models/objeto-interface';
 })
 export class PerdidosComponent implements OnInit {
 
-    private objetos:ObjetoInterface;
+
+    objetosTodos;
+    objetosRecientes;
+
 
     //se inyecta el dataApi
 
-    constructor(/*private dataApi: DataApiService*/) { }
+    constructor(private dataApi: DataApiService) { }
 
     ngOnInit() {
-        //this.getTodosObjetos();
-    }
+        this.dataApi.obtenerObjetosRecientes().subscribe(result=>{
+            this.objetosRecientes=result;
+            console.log(this.objetosRecientes)
+        });
 
+        this.getTodosObjetos();
+    }
+    
     getTodosObjetos(){
-        /*this.dataApi.obtenerTodosObjetos()
-        .subscribe(objetos=>console.log(objetos));*/
-        //dentro de subscribe((objetos: ObjetoInterface)=>this.objetos=objetos));
+        this.dataApi.obtenerTodosObjetos()
+        .subscribe(objetos=>this.objetosTodos=objetos);
+        
 
     }
+
+    
 
 }

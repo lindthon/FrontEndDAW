@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { helpers } from 'chart.js';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-login',
@@ -10,15 +11,15 @@ import { helpers } from 'chart.js';
 })
 export class NewLoginComponent implements OnInit {
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient:HttpClient,private router:Router) { }
 
 
   onSubmit(loginForm:NgForm):void{
     var user = loginForm.value;
     console.log(user.email);
     console.log(user.password);
-    /*
-    this.httpClient.post(`http://192.168.0.24:3000/login`,{
+    
+    this.httpClient.post(`http://localhost:3000/api/acceso`,{
       email:user.email,
       password:user.password
     
@@ -31,9 +32,19 @@ export class NewLoginComponent implements OnInit {
     .subscribe(
       (data:any[]) => {
         console.log(data);
-    })*/
 
-    fetch("http://192.168.0.24:3000/login", {
+        if(data.length>0){
+          let usuario_string = JSON.stringify(data[0].nombreUsuario);
+          localStorage.setItem("usuarioActual",usuario_string);
+          localStorage.setItem("tokenAcceso",'123');
+          this.router.navigate(['/usuario/perfil'])
+        }
+
+    
+    })
+
+    /*
+    fetch("http://localhost:3000/api/acceso", {
             method: 'POST',
             body: JSON.stringify({
               email:user.email,
@@ -46,9 +57,14 @@ export class NewLoginComponent implements OnInit {
                 "Accept": 'application/json',
             }
         })
-    .then((data) => data.json())
+    .then((data) =>{ 
+      data.json()
+      return 
+    })
     .then((resp) => console.log(resp))
     .catch((err) => console.log(err))
+    
+    */
   }
 
   ngOnInit() {

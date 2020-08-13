@@ -21,9 +21,13 @@ export class DataApiService {
     });
     //aqui van los metodos para solicitar al api
 
+    obtenerObjetosRecientes(){
+        return this.http.get("http://localhost:3000/api/recientes");
+    }
+
     obtenerTodosObjetos() {
         const url_api = '';
-        return this.http.get(url_api);
+        return this.http.get("http://localhost:3000/api/objetos");
     }
 
     obtenerObjetoporId(id: String) {
